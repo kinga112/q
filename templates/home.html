@@ -1,0 +1,61 @@
+<html>
+<head>
+
+<style>
+  .button {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .center {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f0e68c;
+  }
+
+  .create_queue {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+  }
+
+  .create_queue:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .get_in_queue {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+  }
+
+  .get_in_queue:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+</style>
+</head>
+
+<body>
+<div class="center">
+
+  <form action="/create_queue/{{ id }}" method="POST" action="">
+    <button class="create_queue">Create Line</button>
+  </form>
+  <form action="/get_in_queue">
+    <button class="get_in_queue">Get in Line</button>
+  </form>
+
+</div>
+</body>
+</html>

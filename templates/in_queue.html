@@ -1,0 +1,36 @@
+<html>
+<head>
+
+<style>
+  .container {
+    height: 200px;
+    position: relative;
+    border: 3px solid green;
+  }
+
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+</style>
+
+<body>
+
+  <div class="container">
+    <div class="center">
+      <form action="/in_queue/id/{{ id }}" method="POST" action="">
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+</body>
+</head>
+</html>
