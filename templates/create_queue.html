@@ -23,14 +23,11 @@
 </style>
 
 <body>
-  
   <body style="background-color: #1a1a1d;"></body>
-
   <div class="container">
     <div class="center">
-      <!--<img src="{{url_for('static', filename='qr_code')}}" alt="{{ qr_pic }}" width="400" height="400">-->
-      <img src="{{ qr_pic }}" alt="{{ qr_pic }}" width="400" height="400">
-      <h1>{{ id }}</h1>
+      <img src="{{url_for('static', filename=qr_pic)}}" width="400" height="400">
+      <h1>Scan QR Code to get in line</h1>
       <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100">
     </div>
   </div>
