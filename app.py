@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    id = random.randint(1000,10000)
-    hash = uuid.uuid4().hex
+    # id = random.randint(1000,10000)
+    id = uuid.uuid4().hex
     id = str(id)
     return render_template('home.html', id=id)
 
@@ -66,7 +66,7 @@ def create_queue(id):
     # folder_path = 'static/'
     # folder = os.listdir(folder_path)
 
-    # Deletes all temp qr code images
+    # # Deletes all temp qr code images
     # for images in folder:
     #     if images.__contains__("code"):
     #         os.remove(os.path.join(folder_path, images))
@@ -136,5 +136,5 @@ def about():
     return render_template('about.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(host='127.0.0.1', debug=True, port=5001)
     
