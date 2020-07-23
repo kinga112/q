@@ -2,60 +2,289 @@
 <head>
 
 <style>
-  .button {
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
 
-  .center {
-    width: 80%;
+/* NAVBAR */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #56081e;
+}
+
+li {
+  float: left;
+  border-right:1px solid #1a1a1d;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 13;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #c3073f;
+}
+
+.active {
+  background-color: #c3073f;
+}  
+
+
+/* CREATE BUTTON */
+.create_button
+{
+    position: absolute;
+    top: 50%;
+    right: 550;
+    left: 0;
+    display: block;
+    width: 150px;
+    height: 150px;
+    padding: 250px;
     margin: 0 auto;
-    padding: 20px;
-    background: #f0e68c;
-  }
+    border: 0;
+    cursor: pointer;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    box-shadow: 0 10px 20px -5px #950740;
+    overflow: hidden;
+}
 
-  .create_queue {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #4CAF50;
-  }
+.create_button:before, create_button:after
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
 
-  .create_queue:hover {
-    background-color: #4CAF50;
-    color: white;
-  }
+.create_button:before
+{
+    background-color: #c3073f;
+    transform: scale(1);
+    /* background-image: url('https://images.assetsdelivery.com/compings_v2/djvstock/djvstock1612/djvstock161201253.jpg'); */
+    background-image: url("{{url_for('static', filename='create_button7.png')}}");
+    background-position: center;
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+    background-size: 500px, 500px;
+    transition: 0.3s ease transform;
+    z-index: 1;
+}
 
-  .get_in_queue {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #008CBA;
-  }
+.create_button:after
+{
+    /* opacity: 0.16; */
+    opacity: 0.50;
+    z-index: 2;
+}
 
-  .get_in_queue:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+.create_button div
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+}
+
+.create_button div:before, .create_button div:after
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    color: #eeeeee;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /*font-weight: bold; */
+    line-height: 1;
+    text-align: center;
+    padding: 25px 0;
+    transition: 0.3s ease all;
+}
+
+.create_button div:before
+{
+    content: "Create Queue";
+    padding-top: 100px;
+    letter-spacing: 0;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.create_button div:after
+{
+    content: "";
+    padding-top: 130px;
+    letter-spacing: -10px;
+    transform: scale(0);
+    opacity: 0;
+}
+
+.create_button:hover:before
+{
+    transform: scale(1.3);
+}
+
+.create_button:hover div:before
+{
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: scale(4);
+}
+
+.create_button:hover div:after
+{
+    letter-spacing: 0;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* GET BUTTON */
+.get_button
+{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 550;
+    display: block;
+    width: 150px;
+    height: 150px;
+    padding: 250px;
+    margin: 0 auto;
+    border: 0;
+    cursor: pointer;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    box-shadow: 0 10px 20px -5px #950740;
+    overflow: hidden;
+}
+
+.get_button:before, .get_button:after
+{
+    background-color: #c3073f;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.get_button:before
+{
+    transform: scale(1);
+    /* background-image: url('https://www.creativefabrica.com/wp-content/uploads/2018/12/Queue-monochrome-icon-EPS-10-vector-by-Hoeda80-580x386.jpg'); */
+    background-image: url("{{url_for('static', filename='test.png')}}");
+    background-size: cover;
+    transition: 0.3s ease transform;
+    z-index: 1;
+}
+
+.get_button:after
+{
+    /* opacity: 0.16; */
+    opacity: 0.50;
+    z-index: 2;
+}
+
+.get_button div
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+}
+
+.get_button div:before, .get_button div:after
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    color: #eeeeee;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-weight: bold; */
+    line-height: 1;
+    text-align: center;
+    padding: 25px 0;
+    transition: 0.3s ease all;
+}
+
+.get_button div:before
+{
+    content: "Get In Queue";
+    padding-top: 100px;
+    letter-spacing: 0;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.get_button div:after
+{
+    content: "";
+    padding-top: 100px;
+    letter-spacing: -10px;
+    transform: scale(0);
+    opacity: 0;
+}
+
+.get_button:hover:before
+{
+    transform: scale(1.3);
+}
+
+.get_button:hover div:before
+{
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: scale(4);
+}
+
+.get_button:hover div:after
+{
+    letter-spacing: 0;
+    opacity: 1;
+    transform: scale(1);
+}
+  
 
 </style>
 </head>
 
-<body>
-<div class="center">
+<body style="background-color: #1a1a1d;">
 
+<ul>
+    <li><a class="active" href="/">Home</a></li>
+    <li><a href="/news">News</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li style="float:right"><a href="/about">About</a></li>
+</ul>
+
+<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
   <form action="/create_queue/{{ id }}" method="POST" action="">
-    <button class="create_queue">Create Line</button>
+    <button class="create_button" href="/create_queue/{{ id }}" onclick="window.open('/admin/{{ id }}','Admin','width=1000,height=1000')"><div></div></button>
   </form>
   <form action="/get_in_queue">
-    <button class="get_in_queue">Get in Line</button>
+    <button class="get_button"><div></div></button>
   </form>
 
-</div>
 </body>
 </html>

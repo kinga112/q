@@ -1,9 +1,10 @@
 from flask import Flask, render_template, send_file, request, redirect
 import random
 import main
-import uuid
 import pyqrcode
-
+import uuid
+import time
+import os
 app = Flask(__name__)
 
 @app.route('/')
@@ -11,15 +12,46 @@ def home():
     id = random.randint(1000,10000)
     hash = uuid.uuid4().hex
     id = str(id)
-    # qrcode = pyqrcode.create('http://127.0.0.1:5001/get_in_queue/{}'.format(id))
-    # qrcode.svg('uca-url.svg', scale=8)
-    # qrcode.eps('uca-url.eps', scale=2)
-    # qrcode.png('code.png', scale=6, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xcc])
-    # qrcode.show()
     return render_template('home.html', id=id)
+
+@app.route('/admin/<id>', methods=['POST', 'GET'])
+def admin(id):
+    id = main.check_id(id)
+    queue = ''
+    if id is None:
+        id = 'QUEUE ID DOESNT EXISTS'
+        print(id)
+    else:
+        queue = main.get_queue(id)
+
+    if request.method == 'POST':
+        try:
+            queue.pop(0)
+        except:
+            print("Queue is empty")
+    
+    try:
+        now_serving = 'Now Serving: {}'. format(queue[0])
+    except:
+        now_serving = 'No Customers in line'
+    try:
+        next_cust = 'Next: {}'.format(queue[1])
+    except:
+        next_cust = ''
+
+    return render_template('admin.html', id=id, queue=queue, now_serving=now_serving, next_cust=next_cust)
 
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
+
+    qrcode = pyqrcode.create('http://127.0.0.1:5001/get_in_queue/{}'.format(id))
+    qrcode.svg('uca-url.svg', scale=8)
+    qrcode.eps('uca-url.eps', scale=2)
+    qrcode.png('static/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+
+    qr_pic = 'code{}.png'.format(id)
+    num = id
+
     if request.method == 'POST':
         main.create_queue(id)
         id = 'Queue ID: {}'.format(main.check_id(id))
@@ -31,7 +63,15 @@ def create_queue(id):
         else:
             id = 'Queue ID: {}'.format(id)
 
-    return render_template('create_queue.html', id=id)
+    # folder_path = 'static/'
+    # folder = os.listdir(folder_path)
+
+    # Deletes all temp qr code images
+    # for images in folder:
+    #     if images.__contains__("code"):
+    #         os.remove(os.path.join(folder_path, images))
+
+    return render_template('create_queue.html', id=id, num=num, qr_pic=qr_pic)
 
 @app.route('/get_in_queue')
 def get_in_queue():
@@ -70,7 +110,31 @@ def in_queue_id(id):
                 main.get_in_queue(id, name)
                 position = main.get_position(id, name)
 
+        return redirect('/in_queue/id/{}/{}'.format(id, name))
+
     return render_template('in_queue_id.html', position=position, id=id)
+
+@app.route('/in_queue/id/<id>/<name>')
+def in_queue_name(id, name):
+    try:
+        position = main.get_position(id, name)
+    except:
+        print("something went wrong")
+
+    return render_template('in_queue_id.html', position=position, id=id, name=name)
+
+@app.route('/news')
+def news():
+    return render_template('news.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+    

@@ -1,0 +1,69 @@
+<html>
+<head>
+
+<style>
+    body{
+    background:#222;
+    text-align:center;
+    font-size:180%;
+    margin:2em;
+    font-family: Calibri, arial, sans-serif;
+}
+.next_button{
+    color:#950740;
+    width: 150px;
+    height: 75px;
+    background-color: #1a1a1d;
+    padding-top:1.8em;
+    display:inline-block;/* or block */
+    position:relative;
+    border-color:#950740;
+    text-decoration:none;
+    transition:all .3s ease-out;
+}
+.next_button:before{
+    content:'►';
+    font-size:2em;
+    position:absolute;
+    top:0;
+    left:50%;
+    margin-right: 3em;
+    border:solid .15em #950740;
+    border-radius:10em;
+    width:1.5em;
+    height:1.5em;
+    line-height:1.3em;
+    border-color:inherit;
+    transition:transform .5s ease-in;
+}
+.next_button:hover{
+    color:#eeeeee;
+    border-color:#eeeeee;
+}
+.next_button:hover:before{
+    transform: rotate(360deg);
+}
+</style>
+</head>
+
+<body style="background-color: #1a1a1d;">
+
+<h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee; text-align: center;">
+    ADMIN
+</h1>
+
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee; text-align: center;">
+    <br>{{ now_serving }} {{ next_cust }}</br>
+    <br>{{ queue }}</br>
+</p>
+
+<form action="/admin/{{ id }}" method="POST" action="">
+    <button class='next_button' href="/admin/{{ id }}"> Next </button>
+  </form>
+
+<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+
+<meta http-equiv="Refresh" content="3">
+
+</body>
+</html>
