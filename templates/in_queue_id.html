@@ -5,27 +5,30 @@
   .container {
     height: 200px;
     position: relative;
-    border: 3px solid green;
+    border: 3px solid #950740;
   }
 
   .center {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+    color: #eeeeee;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 
 </style>
 
-<body>
+<body style="background-color: #1a1a1d;">
 
   <div class="container">
     <div class="center">
       <h1>Your spot in line: {{ position }}</h1>
     </div>
   </div>
+
+  <meta http-equiv="Refresh" content="3">
 
 </body>
 </head>

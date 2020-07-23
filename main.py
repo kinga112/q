@@ -1,5 +1,3 @@
-import pandas as pd
-
 data = {}
 
 def create_queue(id):
@@ -48,3 +46,4 @@ def get_position(id, name):
         if person == name:
             return count
     return None
+

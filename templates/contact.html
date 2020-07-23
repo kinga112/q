@@ -1,0 +1,62 @@
+<html>
+<head>
+
+<style>
+
+/* NAVBAR */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #56081e;
+}
+
+li {
+  float: left;
+  border-right:1px solid #1a1a1d;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 13;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #c3073f;
+}
+
+.active {
+  background-color: #c3073f;
+}  
+  
+
+</style>
+</head>
+
+<body style="background-color: #1a1a1d;">
+
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/news">News</a></li>
+    <li><a class="active" href="/contact">Contact</a></li>
+    <li style="float:right"><a href="/about">About</a></li>
+</ul>
+
+<h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+    CONTACT
+</h1>
+
+<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+
+</body>
+</html>
