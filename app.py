@@ -7,9 +7,6 @@ import time
 import os
 app = Flask(__name__)
 
-data = {}
-pop = []
-
 @app.route('/')
 def home():
     # id = random.randint(1000,10000)
@@ -19,7 +16,7 @@ def home():
 
 @app.route('/admin/<id>', methods=['POST', 'GET'])
 def admin(id):
-    id = check_id(id)
+    id = main.check_id(id)
     queue = ''
     if id is None:
         id = 'QUEUE ID DOESNT EXISTS'
@@ -57,17 +54,15 @@ def create_queue(id):
     num = id
 
     if request.method == 'POST':
-        create_queue(id)
+        main.create_queue(id)
         id = 'Queue ID: {}'.format(main.check_id(id))
     
     if request.method == 'GET':
-        id = check_id(id)
+        id = main.check_id(id)
         if id is None:
             id = 'QUEUE ID DOESNT EXISTS'
         else:
             id = 'Queue ID: {}'.format(id)
-
-    print("DATA 2:", data)
 
     return render_template('create_queue.html', id=id, num=num, qr_pic=qr_pic)
 
@@ -153,33 +148,6 @@ def contact():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-def create_queue(id):
-    print("creating queue")
-    queue = []
-    data[id] = queue
-    print("DATA:", data)
-    
-def get_in_queue(id, name):
-    print("getting in queue")
-    try:
-        queue = data[id]
-    except:
-        return None
-    
-    queue.append(name)
-    data[id] = queue
-    return data[id]
-
-def check_id(id):
-    print("checking id")
-    try:
-        if id in data:
-            return id
-        else:
-            return None
-    except:
-        return None
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', debug=True, port=5001)
