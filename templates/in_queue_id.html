@@ -28,7 +28,27 @@
     </div>
   </div>
 
-  <meta http-equiv="Refresh" content="3">
+  <meta http-equiv="Refresh" content="5">
+  
+  <script>
+    if ("{{ position }}" == "out of line") {
+      location.replace("/")
+    }
+
+    if ("{{ name }}" == "none") {
+      myFunction()
+    }
+
+    function myFunction() {
+      var txt;
+      var person = prompt("Please enter your name:", "name");
+      if (person == null || person == "") {
+        myFunction()
+      }else{
+        location.replace("/in_queue/id/{{ id }}/" + person)
+      }
+    }
+  </script>
 
 </body>
 </head>
