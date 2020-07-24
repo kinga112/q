@@ -110,7 +110,7 @@ def in_queue_id(id):
 
     print("NAME: {}\n\n".format(name))
 
-    main.del_pics()
+    # main.del_pics()
 
     return render_template('in_queue_id.html', position=position, id=id, name=name)
 
