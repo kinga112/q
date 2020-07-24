@@ -26,6 +26,7 @@ def admin(id):
 
     if request.method == 'POST':
         try:
+            main.popped(queue[0])
             queue.pop(0)
         except:
             print("Queue is empty")
@@ -44,7 +45,7 @@ def admin(id):
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
 
-    qrcode = pyqrcode.create('http://127.0.0.1:5001/get_in_queue/{}'.format(id))
+    qrcode = pyqrcode.create('http://127.0.0.1:5001/in_queue/id/{}'.format(id))
     qrcode.svg('uca-url.svg', scale=8)
     qrcode.eps('uca-url.eps', scale=2)
     qrcode.png('static/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
@@ -62,14 +63,6 @@ def create_queue(id):
             id = 'QUEUE ID DOESNT EXISTS'
         else:
             id = 'Queue ID: {}'.format(id)
-
-    # folder_path = 'static/'
-    # folder = os.listdir(folder_path)
-
-    # # Deletes all temp qr code images
-    # for images in folder:
-    #     if images.__contains__("code"):
-    #         os.remove(os.path.join(folder_path, images))
 
     return render_template('create_queue.html', id=id, num=num, qr_pic=qr_pic)
 
@@ -112,14 +105,35 @@ def in_queue_id(id):
 
         return redirect('/in_queue/id/{}/{}'.format(id, name))
 
-    return render_template('in_queue_id.html', position=position, id=id)
+    if request.method == 'GET':
+        name = 'none'
+
+    print("NAME: {}\n\n".format(name))
+
+    main.del_pics()
+
+    return render_template('in_queue_id.html', position=position, id=id, name=name)
 
 @app.route('/in_queue/id/<id>/<name>')
 def in_queue_name(id, name):
-    try:
-        position = main.get_position(id, name)
-    except:
-        print("something went wrong")
+    id = main.check_id(id)
+    pop = main.get_pop()
+    print("POP", pop)
+    if id is None:
+        id = 'QUEUE ID DOESNT EXISTS'
+    else:
+        queue = main.get_queue(id)
+        if not queue:
+            queue = main.get_in_queue(id, name)
+            position = main.get_position(id, name)
+        if name in pop:
+            position = 'out of line'
+            main.remove(id, name)
+        else:
+            position = main.get_position(id, name)
+            if position is None:
+                main.get_in_queue(id, name)
+                position = main.get_position(id, name)
 
     return render_template('in_queue_id.html', position=position, id=id, name=name)
 
