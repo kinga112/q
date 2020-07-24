@@ -8,6 +8,7 @@ def create_queue(id):
     print("creating queue")
     queue = []
     data[id] = queue
+    print("DATA:", data)
     
 def get_in_queue(id, name):
     print("getting in queue")
