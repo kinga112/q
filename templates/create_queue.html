@@ -13,8 +13,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    text-align: center;
     color: #eeeeee;
-    font-size: 22px;
+    font-size: 13px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -28,6 +29,7 @@
     <div class="center">
       <img src="{{url_for('static', filename=qr_pic)}}" width="400" height="400">
       <h1>Scan QR Code to get in line</h1>
+      <h2>Or Use Code: {{ id }}</h2>
       <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100">
     </div>
   </div>
