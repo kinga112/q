@@ -1,31 +1,37 @@
-from flask import Flask, render_template, send_file, request, redirect
+from flask import Flask, render_template, request, redirect
+# from flask_sqlalchemy import SQLAlchemy
 import random
-import main
+#import main
 import pyqrcode
-import uuid
 import string
 import time
+import threading
 import os
+
 app = Flask(__name__)
+
+data = {}
+pop = []
 
 @app.route('/')
 def home():
     id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    # id = ''.join(random.choices(string.ascii_uppercase, k=6))
     return render_template('home.html', id=id)
 
 @app.route('/admin/<id>', methods=['POST', 'GET'])
 def admin(id):
-    id = main.check_id(id)
+    id = check_id(id)
     queue = ''
     if id is None:
         id = 'QUEUE ID DOESNT EXISTS'
         print(id)
     else:
-        queue = main.get_queue(id)
+        queue = get_queue(id)
 
     if request.method == 'POST':
         try:
-            main.popped(queue[0])
+            popped(queue[0])
             queue.pop(0)
         except:
             print("Queue is empty")
@@ -53,11 +59,11 @@ def create_queue(id):
     num = id
 
     if request.method == 'POST':
-        main.create_queue(id)
-        id = '{}'.format(main.check_id(id))
+        create_queue(id)
+        id = '{}'.format(check_id(id))
     
     if request.method == 'GET':
-        id = main.check_id(id)
+        id = check_id(id)
         if id is None:
             id = 'QUEUE ID DOESNT EXISTS'
         else:
@@ -72,7 +78,7 @@ def get_in_queue():
 @app.route('/get_in_queue', methods=['POST'])
 def get_id():
     id = request.form['id']
-    id = main.check_id(id)
+    id = check_id(id)
     if id is None:
         id = 'QUEUE ID DOESNT EXISTS'
     return id
@@ -92,15 +98,15 @@ def in_queue_id(id):
     position = 0
     if request.method == 'POST':
         name = get_name()
-        queue = main.get_queue(id)
+        queue = get_queue(id)
         if not queue:
-            queue = main.get_in_queue(id, name)
-            position = main.get_position(id, name)
+            queue = get_in_queue(id, name)
+            position = get_position(id, name)
         else:
-            position = main.get_position(id, name)
+            position = get_position(id, name)
             if position is None:
-                main.get_in_queue(id, name)
-                position = main.get_position(id, name)
+                get_in_queue(id, name)
+                position = get_position(id, name)
 
         return redirect('/in_queue/id/{}/{}'.format(id, name))
 
@@ -109,30 +115,30 @@ def in_queue_id(id):
 
     print("NAME: {}\n\n".format(name))
 
-    main.del_pics()
+    del_pics()
 
     return render_template('in_queue_id.html', position=position, id=id, name=name)
 
 @app.route('/in_queue/id/<id>/<name>')
 def in_queue_name(id, name):
-    id = main.check_id(id)
-    pop = main.get_pop()
+    id = check_id(id)
+    pop = get_pop()
     print("POP", pop)
     if id is None:
         id = 'QUEUE ID DOESNT EXISTS'
     else:
-        queue = main.get_queue(id)
+        queue = get_queue(id)
         if not queue:
-            queue = main.get_in_queue(id, name)
-            position = main.get_position(id, name)
+            queue = get_in_queue(id, name)
+            position = get_position(id, name)
         if name in pop:
             position = 'out of line'
-            main.remove(id, name)
+            remove(id, name)
         else:
-            position = main.get_position(id, name)
+            position = get_position(id, name)
             if position is None:
-                main.get_in_queue(id, name)
-                position = main.get_position(id, name)
+                get_in_queue(id, name)
+                position = get_position(id, name)
 
     return render_template('in_queue_id.html', position=position, id=id, name=name)
 
@@ -148,6 +154,87 @@ def contact():
 def about():
     return render_template('about.html')
 
+def create_queue(id):
+    print("creating queue")
+    print("DATA:", data)
+    queue = []
+    data[id] = queue
+    
+def get_in_queue(id, name):
+    print("getting in queue")
+    print("DATA:", data)
+    try:
+        queue = data[id]
+    except:
+        return None
+    
+    queue.append(name)
+    data[id] = queue
+    return data[id]
+
+def get_queue(id):
+    print("getting queue")
+    print("DATA:", data)
+    try:
+        if id in data:
+            queue = data[id]
+            return queue
+        else:
+            return None
+    except:
+        return None
+
+def check_id(id):
+    print("checking id")
+    print("DATA:", data)
+    try:
+        if id in data:
+            return id
+        else:
+            return None
+    except:
+        return None
+
+def get_position(id, name):
+    print("getting position")
+    queue = data[id]
+    count = 0
+    for person in queue:
+        count += 1
+        if person == name:
+            return count
+    return None
+
+def remove(id, name):
+    queue = data[id]
+    try:
+        queue.remove(name)
+    except:
+        print("Item Already Removed")
+
+def popped(name):
+    print("POPPED\n\n")
+    pop.append(name)
+
+def get_pop():
+    return pop
+
+def clear_pop():
+    pop.pop(0)
+    timer = threading.Timer(10, clear_pop)
+    timer.start()
+
+def del_pics():
+    folder_path = 'static/'
+    folder = os.listdir(folder_path)
+
+    for images in folder:
+        if images.__contains__("code"):
+            os.remove(os.path.join(folder_path, images))
+
+    timer = threading.Timer(60, del_pics)
+    timer.start()
+
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', debug=True, port=5001)
+    app.run(host='127.0.0.1', threaded=True, debug=True, port=5001)
     
