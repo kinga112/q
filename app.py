@@ -3,15 +3,14 @@ import random
 import main
 import pyqrcode
 import uuid
+import string
 import time
 import os
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # id = random.randint(1000,10000)
-    id = uuid.uuid4().hex
-    id = str(id)
+    id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
     return render_template('home.html', id=id)
 
 @app.route('/admin/<id>', methods=['POST', 'GET'])
@@ -55,14 +54,14 @@ def create_queue(id):
 
     if request.method == 'POST':
         main.create_queue(id)
-        id = 'Queue ID: {}'.format(main.check_id(id))
+        id = '{}'.format(main.check_id(id))
     
     if request.method == 'GET':
         id = main.check_id(id)
         if id is None:
             id = 'QUEUE ID DOESNT EXISTS'
         else:
-            id = 'Queue ID: {}'.format(id)
+            id = '{}'.format(id)
 
     return render_template('create_queue.html', id=id, num=num, qr_pic=qr_pic)
 
