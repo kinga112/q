@@ -105,9 +105,9 @@ def popped(name):
 def get_pop():
     get = "SELECT * FROM pop"
     cursor.execute(get)
-    data = []
+    data = ''
     for row in cursor:
-        data.append(row[1])
+        data += row[1]
     return data
 
 def clear_pop():
