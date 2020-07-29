@@ -1,6 +1,5 @@
 import threading
 import os
-import configparser
 import psycopg2
 
 uri = os.environ['DATABASE_URL']
