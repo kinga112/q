@@ -1,6 +1,5 @@
 import threading
 import os
-from sqlalchemy import create_engine
 import configparser
 import psycopg2
 
