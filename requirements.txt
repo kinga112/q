@@ -1,4 +1,5 @@
 flask
-pyqrcode
 gunicorn
 pypng
+pyqrcode
+psycopg2
