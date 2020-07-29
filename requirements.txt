@@ -1,0 +1,5 @@
+flask
+pyqrcode
+uuid
+gunicorn
+pypng

@@ -1,72 +1,121 @@
 import threading
 import os
+from sqlalchemy import create_engine
+import configparser
+import psycopg2
 
-data = {}
-pop = []
+uri = os.environ['DATABASE_URL']
+conn = psycopg2.connect(uri)
+cursor = conn.cursor()
+
+try:
+    pop = "CREATE TABLE pop (id serial primary key, name varchar(256));"
+    cursor.execute(pop)
+    conn.commit()
+except:
+    cursor.execute("ROLLBACK")
+    conn.commit()
+    print("Table [pop] already created")
 
 def create_queue(id):
-    print("creating queue")
-    queue = []
-    data[id] = queue
+    try:
+        create = "CREATE TABLE {} (id serial primary key, name varchar(256));".format(id)
+        cursor.execute(create)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Table [{}] already craeted".format(id))
     
 def get_in_queue(id, name):
-    print("getting in queue")
     try:
-        queue = data[id]
+        insert = "INSERT into {} (name) values ('{}');".format(id, name)
+        cursor.execute(insert)
+        conn.commit()
     except:
-        return None
-    
-    queue.append(name)
-    data[id] = queue
-    return data[id]
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_in_queue]")
 
 def get_queue(id):
-    print("getting queue")
     try:
-        if id in data:
-            queue = data[id]
-            return queue
-        else:
-            return None
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        queue = ''
+        for row in cursor:
+            queue = queue + '{}, '.format(row[1])
+        queue = queue[0:-2]
+        return queue
     except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_queue]")
         return None
 
 def check_id(id):
-    print("checking id")
     try:
-        if id in data:
-            return id
-        else:
-            return None
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        return id
     except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [check_id]")
         return None
 
 def get_position(id, name):
-    print("getting position")
-    queue = data[id]
-    count = 0
-    for person in queue:
-        count += 1
-        if person == name:
-            return count
-    return None
+    try:
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        count = 0
+        for row in cursor:
+            count += 1
+            name1 = row[1]
+            if name1 == name:
+                return count
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_position]")
+        return None
 
 def remove(id, name):
-    queue = data[id]
     try:
-        queue.remove(name)
+        delete = "DELETE FROM {} Where name = '{}';".format(id, name)
+        cursor.execute(delete)
+        conn.commit()
     except:
-        print("Item Already Removed")
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [remove]")
+
+def pop_remove(id):
+    try:
+        delete = "DELETE FROM {} LIMIT 1;"
+        cursor.execute(delete)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [pop_remove]")
 
 def popped(name):
-    print("POPPED\n\n")
-    pop.append(name)
+    insert = "INSERT into pop (name) values ('{}');".format(name)
+    cursor.execute(insert)
+    conn.commit()
 
 def get_pop():
-    return pop
+    get = "SELECT * FROM pop"
+    cursor.execute(get)
+    data = []
+    for row in cursor:
+        data.append(row[1])
+    return data
 
 def clear_pop():
-    pop.pop(0)
+    drop = "DROP pop"
+    cursor.execute(drop)
+    conn.commit()
     timer = threading.Timer(10, clear_pop)
     timer.start()
 
