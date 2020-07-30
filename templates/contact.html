@@ -37,7 +37,13 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #c3073f;
-}  
+}
+
+#bottom {
+  position:absolute;
+  bottom:0;
+  right:0;
+}
   
 
 </style>
@@ -45,18 +51,26 @@ li a:hover:not(.active) {
 
 <body style="background-color: #1a1a1d;">
 
-<ul>
+  <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/news">News</a></li>
-    <li><a class="active" href="/contact">Contact</a></li>
-    <li style="float:right"><a href="/about">About</a></li>
-</ul>
+    <li><a href="/about">About</a></li>
+    <li style="float:right"><a class="active" href="/contact">Contact</a></li>
+  </ul>
+
+<div id='bottom'>
+  <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+</div>
 
 <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
     CONTACT
 </h1>
-
-<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  Alden King: Full developer of Cyber Sequence
+</p>
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  Feel free to contact me at kinga5@wit.edu with any inqueries!
+</p>
 
 </body>
 </html>

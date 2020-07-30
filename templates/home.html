@@ -260,27 +260,35 @@ li a:hover:not(.active) {
     opacity: 1;
     transform: scale(1);
 }
-  
+
+#bottom {
+    position:absolute;
+    bottom:0;
+    right:0;
+}
 
 </style>
 </head>
 
 <body style="background-color: #1a1a1d;">
 
-<ul>
-    <li><a class="active" href="/">Home</a></li>
-    <li><a href="/news">News</a></li>
-    <li><a href="/contact">Contact</a></li>
-    <li style="float:right"><a href="/about">About</a></li>
-</ul>
+    <ul>
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/about">About</a></li>
+        <li style="float:right"><a href="/contact">Contact</a></li>
+    </ul>
 
-<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
-  <form action="/create_queue/{{ id }}" method="POST" action="">
-    <button class="create_button" href="/create_queue/{{ id }}" onclick="window.open('/admin/{{ id }}','Admin','width=1000,height=1000')"><div></div></button>
-  </form>
-  <form action="/get_in_queue">
-    <button class="get_button"><div></div></button>
-  </form>
+    <div id='bottom'>
+        <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+    </div>
+
+    <form action="/create_queue/{{ id }}" method="POST" action="">
+        <button class="create_button" href="/create_queue/{{ id }}" onclick="window.open('/admin/{{ id }}','Admin','width=1000,height=1000')"><div></div></button>
+    </form>
+    <form action="/get_in_queue">
+        <button class="get_button"><div></div></button>
+    </form>
 
 </body>
 </html>

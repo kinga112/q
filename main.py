@@ -87,16 +87,6 @@ def remove(id, name):
         conn.commit()
         print("Error: [remove]")
 
-def pop_remove(id):
-    try:
-        delete = "DELETE FROM {} LIMIT 1;"
-        cursor.execute(delete)
-        conn.commit()
-    except:
-        cursor.execute("ROLLBACK")
-        conn.commit()
-        print("Error: [pop_remove]")
-
 def popped(name):
     insert = "INSERT into pop (name) values ('{}');".format(name)
     cursor.execute(insert)
@@ -109,13 +99,6 @@ def get_pop():
     for row in cursor:
         data += row[1]
     return data
-
-def clear_pop():
-    drop = "DROP pop"
-    cursor.execute(drop)
-    conn.commit()
-    timer = threading.Timer(10, clear_pop)
-    timer.start()
 
 def del_pics():
     folder_path = 'static/'

@@ -29,7 +29,10 @@ def admin(id):
     names = queue.split(',')
     
     try:
-        now_serving = 'Now Serving: {}'. format(names[0])
+        if names[0] == '':
+            now_serving = 'No Customers In Line'
+        else:
+            now_serving = 'Now Serving: {}'. format(names[0])
     except:
         now_serving = 'No Customers in line'
     try:
@@ -38,7 +41,6 @@ def admin(id):
         next_cust = ''
 
     if request.method == 'POST':
-        print("\nButton Pressed\n")
         main.remove(id, names[0])
         main.popped(names[0])
 
