@@ -25,24 +25,21 @@ def admin(id):
     else:
         queue = main.get_queue(id)
 
-    print("QUEUE:", queue)
-    names = queue.split(',')
+    if request.method == 'POST':
+        main.remove(id, queue[0])
+        main.popped(queue[0])
     
     try:
-        if names[0] == '':
+        if queue[0] == '':
             now_serving = 'No Customers In Line'
         else:
-            now_serving = 'Now Serving: {}'. format(names[0])
+            now_serving = 'Now Serving: {}'. format(queue[0])
     except:
         now_serving = 'No Customers in line'
     try:
-        next_cust = 'Next: {}'.format(names[1])
+        next_cust = 'Next Customer: {}'.format(queue[1])
     except:
         next_cust = ''
-
-    if request.method == 'POST':
-        main.remove(id, names[0])
-        main.popped(names[0])
 
     return render_template('admin.html', id=id, queue=queue, now_serving=now_serving, next_cust=next_cust)
 

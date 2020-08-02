@@ -23,7 +23,7 @@ def create_queue(id):
     except:
         cursor.execute("ROLLBACK")
         conn.commit()
-        print("Table [{}] already craeted".format(id))
+        print("Table [{}] already created".format(id))
     
 def get_in_queue(id, name):
     try:
@@ -39,10 +39,9 @@ def get_queue(id):
     try:
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
-        queue = ''
+        queue = []
         for row in cursor:
-            queue = queue + '{}, '.format(row[1])
-        queue = queue[0:-2]
+            queue.append(row[1])
         return queue
     except:
         cursor.execute("ROLLBACK")
@@ -68,8 +67,7 @@ def get_position(id, name):
         count = 0
         for row in cursor:
             count += 1
-            name1 = row[1]
-            if name1 == name:
+            if str(row[1]) == name:
                 return count
     except:
         cursor.execute("ROLLBACK")
@@ -93,12 +91,18 @@ def popped(name):
     conn.commit()
 
 def get_pop():
-    get = "SELECT * FROM pop"
-    cursor.execute(get)
-    data = ''
-    for row in cursor:
-        data += row[1]
-    return data
+    try:
+        get = "SELECT * FROM pop"
+        cursor.execute(get)
+        data = ''
+        for row in cursor:
+            data += row[1]
+        return data
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_pop]")
+        return None
 
 def del_pics():
     folder_path = 'static/'
