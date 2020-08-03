@@ -1,74 +1,120 @@
 import threading
 import os
+import psycopg2
 
-data = {}
-pop = []
+uri = os.environ['DATABASE_URL']
+conn = psycopg2.connect(uri)
+cursor = conn.cursor()
+
 
 def create_queue(id):
-    print("creating queue")
-    queue = []
-    data[id] = queue
+    try:
+        create = "CREATE TABLE {} (id serial primary key, name varchar(256));".format(id)
+        cursor.execute(create)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Table [{}] already created".format(id))
+    try:
+        pop = "CREATE TABLE pop{} (id serial primary key, name varchar(256));".format(id)
+        cursor.execute(pop)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Table [pop{}] already created".format(id))
     
 def get_in_queue(id, name):
-    print("getting in queue")
     try:
-        queue = data[id]
+        insert = "INSERT into {} (name) values ('{}');".format(id, name)
+        cursor.execute(insert)
+        conn.commit()
     except:
-        return None
-    
-    queue.append(name)
-    data[id] = queue
-    return data[id]
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_in_queue]")
 
 def get_queue(id):
-    print("getting queue")
     try:
-        if id in data:
-            queue = data[id]
-            return queue
-        else:
-            return None
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        queue = []
+        for row in cursor:
+            queue.append(row[1])
+        return queue
     except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_queue]")
         return None
 
 def check_id(id):
-    print("checking id")
     try:
-        if id in data:
-            return id
-        else:
-            return None
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        return id
     except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [check_id]")
         return None
 
 def get_position(id, name):
-    print("getting position")
-    queue = data[id]
-    count = 0
-    for person in queue:
-        count += 1
-        if person == name:
-            return count
-    return None
+    try:
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        count = 0
+        for row in cursor:
+            count += 1
+            if str(row[1]) == name:
+                return count
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_position]")
+        return None
 
 def remove(id, name):
-    queue = data[id]
     try:
-        queue.remove(name)
+        delete = "DELETE FROM {} Where name = '{}';".format(id, name)
+        cursor.execute(delete)
+        conn.commit()
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        queue = []
+        for row in cursor:
+            queue.append(row[1])
+        return queue
     except:
-        print("Item Already Removed")
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [remove]")
 
-def popped(name):
-    print("POPPED\n\n")
-    pop.append(name)
+def popped(id, name):
+    print('popped')
+    try:
+        insert = "INSERT into pop{} (name) values ('{}');".format(id, name)
+        cursor.execute(insert)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [popped]")
 
-def get_pop():
-    return pop
-
-def clear_pop():
-    pop.pop(0)
-    timer = threading.Timer(10, clear_pop)
-    timer.start()
+def get_pop(id):
+    try:
+        get = "SELECT * FROM pop{}".format(id)
+        cursor.execute(get)
+        data = ''
+        for row in cursor:
+            data += row[1]
+        return data
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [get_pop]")
+        return None
 
 def del_pics():
     folder_path = 'static/'

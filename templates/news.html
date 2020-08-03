@@ -37,7 +37,13 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #c3073f;
-}  
+}
+
+#bottom {
+  position:absolute;
+  bottom:0;
+  right:0;
+} 
   
 
 </style>
@@ -47,19 +53,24 @@ li a:hover:not(.active) {
 <ul>
     <li><a href="/">Home</a></li>
     <li><a class="active" href="/news">News</a></li>
-    <li><a href="/contact">Contact</a></li>
-    <li style="float:right"><a href="/about">About</a></li>
+    <li><a href="/about">About</a></li>
+    <li style="float:right"><a href="/contact">Contact</a></li>
 </ul>
 
+<div id='bottom'>
+  <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+</div>
+
 <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
-    NEWS
+  NEWS
 </h1>
 
 <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
-    Heres the news: blah blah blah
+  July 27, 2020: v2.0 Released
 </p>
-
-<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  July 22, 2020: v1.0 Released
+</p>
 
 </body>
 </html>

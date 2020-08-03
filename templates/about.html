@@ -37,26 +37,50 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #c3073f;
-}  
-  
+}
+
+#bottom {
+  position:absolute;
+  bottom:0;
+  right:0;
+} 
 
 </style>
 </head>
 
 <body style="background-color: #1a1a1d;">
 
-<ul>
+  <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/news">News</a></li>
-    <li><a href="/contact">Contact</a></li>
-    <li style="float:right"><a class="active" href="/about">About</a></li>
+    <li><a class="active" href="/about">About</a></li>
+    <li style="float:right"><a href="/contact">Contact</a></li>
 </ul>
+
+<div id='bottom'>
+  <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+</div>
 
 <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
     ABOUT
 </h1>
-
-<img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  Creating Queue:
+</p>
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  Creating a queue will give user access to the Admin page. 
+  The Admin page gives queue owner ability to see everyone in line and to move on to next person in queue.
+  Creating a queue is as simple as pressing the big Create Queue button. 
+  The Admin page will pop up in another tab, while the main screen gives users the ability to Scab or Type the code to enter the queue.
+</p>
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  Joining Queue:
+</p>
+<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee;">
+  Joining a Queue is as simple as pulling out yout smartphone and scaning the QR code with your camera.
+  If your phone does no suppoer scanning QR codes or some other issue occures, you can join a queue manually 
+  by heading to Cyber Sequences Get in Queue page and entering in the credentials there.
+</p>
 
 </body>
 </html>
