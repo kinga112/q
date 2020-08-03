@@ -94,10 +94,10 @@
   }
 
   .right {
-    top: 7.8125vw;
-    right: 13;
+    top: 10vw;
+    right: 10vw;
     background-color: #1a1a1d;
-    height: 31.25vw
+    height: 30vw
   }
 
   .centered {
@@ -116,7 +116,7 @@
   .centeredright {
     position: absolute;
     text-align: center;
-    left: 15vw;
+    left: 23vw;
   }
 
 
@@ -135,15 +135,15 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #1a1a1d; 
+    background: #1a1a1d;
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #555; 
+    background: #555;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #c3073f; 
+    background: #c3073f;
   }
     
 </style>
@@ -180,7 +180,8 @@
 <div class="split right">
   <div class="centeredright">
     <div style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee; text-align: center;">
-        <table style="width: 26vw; color: #eeeeee;">
+      {% if queue %}
+      <table style="width: 26vw; color: #eeeeee;">
           <tr>
             <th>
               Queue
@@ -193,7 +194,8 @@
             </td>
           </tr>
           {% endfor %}
-        </table>
+      </table>
+      {% endif %}
     </div>
   </div>
 </div>

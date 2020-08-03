@@ -21,13 +21,15 @@ def admin(id):
     queue = ''
     if id is None:
         id = 'QUEUE ID DOESNT EXISTS'
-        print(id)
     else:
         queue = main.get_queue(id)
 
     if request.method == 'POST':
-        main.remove(id, queue[0])
-        main.popped(queue[0])
+        try:
+            main.popped(id, queue[0])
+            queue = main.remove(id, queue[0])
+        except:
+            print('Queue is Empty')
     
     try:
         if queue[0] == '':
@@ -115,23 +117,23 @@ def in_queue_id(id):
 def in_queue_name(id, name):
     position = 0
     id = main.check_id(id)
-    pop = main.get_pop()
+    pop = main.get_pop(id)
     if id is None:
         id = 'QUEUE ID DOESNT EXISTS'
     else:
         queue = main.get_queue(id)
         if queue is not None:
             position = main.get_position(id, name)
-        if name in pop:
-            position = 'out of line'
-            main.remove(id, name)
-            main.remove('pop', name)
-        else:
-            position = main.get_position(id, name)
-            print("poposit:", position)
-            if position is None:
-                main.get_in_queue(id, name)
+        if pop is not None:
+            if name in pop:
+                position = 'out of line'
+                queue = main.remove(id, name)
+                queue = main.remove('pop{}'.format(id), name)
+            else:
                 position = main.get_position(id, name)
+                if position is None:
+                    main.get_in_queue(id, name)
+                    position = main.get_position(id, name)
 
     return render_template('in_queue_id.html', position=position, id=id, name=name)
 

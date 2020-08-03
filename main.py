@@ -6,14 +6,6 @@ uri = os.environ['DATABASE_URL']
 conn = psycopg2.connect(uri)
 cursor = conn.cursor()
 
-try:
-    pop = "CREATE TABLE pop (id serial primary key, name varchar(256));"
-    cursor.execute(pop)
-    conn.commit()
-except:
-    cursor.execute("ROLLBACK")
-    conn.commit()
-    print("Table [pop] already created")
 
 def create_queue(id):
     try:
@@ -24,6 +16,14 @@ def create_queue(id):
         cursor.execute("ROLLBACK")
         conn.commit()
         print("Table [{}] already created".format(id))
+    try:
+        pop = "CREATE TABLE pop{} (id serial primary key, name varchar(256));".format(id)
+        cursor.execute(pop)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Table [pop{}] already created".format(id))
     
 def get_in_queue(id, name):
     try:
@@ -80,19 +80,31 @@ def remove(id, name):
         delete = "DELETE FROM {} Where name = '{}';".format(id, name)
         cursor.execute(delete)
         conn.commit()
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        queue = []
+        for row in cursor:
+            queue.append(row[1])
+        return queue
     except:
         cursor.execute("ROLLBACK")
         conn.commit()
         print("Error: [remove]")
 
-def popped(name):
-    insert = "INSERT into pop (name) values ('{}');".format(name)
-    cursor.execute(insert)
-    conn.commit()
-
-def get_pop():
+def popped(id, name):
+    print('popped')
     try:
-        get = "SELECT * FROM pop"
+        insert = "INSERT into pop{} (name) values ('{}');".format(id, name)
+        cursor.execute(insert)
+        conn.commit()
+    except:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+        print("Error: [popped]")
+
+def get_pop(id):
+    try:
+        get = "SELECT * FROM pop{}".format(id)
         cursor.execute(get)
         data = ''
         for row in cursor:
