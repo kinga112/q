@@ -3,9 +3,14 @@
 
 <style>
   .container {
-    height: 200px;
+    height: 25%;
     position: relative;
-    border: 3px solid #950740;
+    top: 25%;
+    bottom: 20%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border: 10px solid #950740;
+    line-height: 20pt;
   }
 
   .center {
@@ -18,17 +23,22 @@
     transform: translate(-50%, -50%);
   }
 
+
 </style>
 
 <body style="background-color: #1a1a1d;">
 
   <div class="container">
     <div class="center">
+
       <form action="/in_queue/id/{{ id }}" method="POST" action="">
-        <label for="name">First and Last Name</label><br>
-        <input type="text" id="name" name="name"><br><br>
+        <br>
+          <label for="name">Full Name</label>
+          <br>
+        <input type="text" id="name" name="name" autocomplete="off">
         <input type="submit" value="Submit">
       </form>
+
     </div>
   </div>
 
