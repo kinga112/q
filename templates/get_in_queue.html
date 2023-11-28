@@ -4,7 +4,12 @@
   .container { 
     height: 200px;
     position: relative;
-    border: 3px solid #950740; 
+    top: 25%;
+    bottom: 20%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border: 10px solid #950740;
+    line-height: 20pt;
   }
 
   .center {
@@ -24,8 +29,10 @@
   <div class="container">
     <div class="center">
       <form action="/in_queue" method="POST" action="">
-        <label for="id">ID</label><br>
-        <input type="text" id="id" name="id"><br><br>
+        <br>
+          <label for="id">ID</label>
+        </br>
+        <input type="text" id="id" name="id" maxlength="6" size="6" autocomplete="off">
         <input type="submit" value="Submit">
       </form>
     </div>
