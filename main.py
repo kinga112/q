@@ -2,7 +2,7 @@ import threading
 import os
 import psycopg2
 
-uri = os.environ['DATABASE_URL']
+uri = os.environ['POSTGRES_URL']
 conn = psycopg2.connect(uri)
 cursor = conn.cursor()
 

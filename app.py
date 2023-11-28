@@ -3,9 +3,6 @@ import random
 import main
 import pyqrcode
 import string
-import time
-import threading
-import os
 
 app = Flask(__name__)
 
