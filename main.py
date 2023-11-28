@@ -6,7 +6,6 @@ uri = os.environ['POSTGRES_URL']
 conn = psycopg2.connect(uri)
 cursor = conn.cursor()
 
-
 def create_queue(id):
     try:
         create = "CREATE TABLE {} (id serial primary key, name varchar(256));".format(id)
