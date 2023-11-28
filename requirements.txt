@@ -2,4 +2,5 @@ flask
 gunicorn
 pypng
 pyqrcode
-psycopg2
+#psycopg2
+psycopg2-binary
