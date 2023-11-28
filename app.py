@@ -6,7 +6,6 @@ import string
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def home():
     id = ''.join(random.choices(string.ascii_uppercase, k=6))
