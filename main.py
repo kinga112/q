@@ -119,7 +119,7 @@ def get_pop(id):
         return None
 
 def del_pics():
-    folder_path = 'static/'
+    folder_path = '/tmp/'
     folder = os.listdir(folder_path)
 
     for images in folder:
