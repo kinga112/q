@@ -37,7 +37,7 @@
   <body style="background-color: #1a1a1d;"></body>
   <div class="container">
     <div class="center">
-      <img src="{{url_for('/tmp', filename='qr_code_test')}}" width="400" height="400">
+      <img src="{{url_for('static', filename=qr_pic)}}" width="400" height="400">
       <h1>Scan QR Code to get in line</h1>
       <h2>Or Use Code: {{ id }}</h2>
     </div>
