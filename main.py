@@ -3,9 +3,9 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 
-load_dotenv('.env.local')
-uri = os.getenv('POSTGRES_URL')
-conn = psycopg2.connect(uri)
+# load_dotenv('.env.local')
+# uri = os.getenv('POSTGRES_URL')
+conn = psycopg2.connect("postgres://default:wi74yOPWqrYh@ep-nameless-scene-27050405-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb")
 cursor = conn.cursor()
 
 def create_queue(id):
