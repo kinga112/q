@@ -47,7 +47,7 @@ def create_queue(id):
     qrcode = pyqrcode.create('cyber-sequence.herokuapp.com/in_queue/id/{}'.format(id))
     # qrcode.svg('uca-url.svg', scale=8)
     # qrcode.eps('uca-url.eps', scale=2)
-    qrcode.png('static/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+    qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
 
     qr_pic = 'code{}.png'.format(id)
     num = id
