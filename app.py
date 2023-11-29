@@ -53,10 +53,12 @@ def create_queue(id):
     num = id
 
     if request.method == 'POST':
+        print("POST")
         main.create_queue(id)
         id = '{}'.format(main.check_id(id))
     
     if request.method == 'GET':
+        print("GET")
         id = main.check_id(id)
         if id is None:
             id = 'QUEUE ID DOESNT EXISTS'
