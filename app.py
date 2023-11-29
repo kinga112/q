@@ -50,6 +50,7 @@ def create_queue(id):
     qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
 
     qr_pic = 'code{}.png'.format(id)
+    print("QR PIC: ", qr_pic)
     num = id
 
     if request.method == 'POST':
