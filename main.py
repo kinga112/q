@@ -29,12 +29,13 @@ def create_queue(id):
         print("Table [pop{}] already created".format(id))
     
 def get_in_queue(id, name):
+    print("NAME 0: ", name)
     try:
         if '%' in name:
             return
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
-        insert = "INSERT into {} (name) values ('{}');".format(id, name)
+        insert = "INSERT into {} (name) values ('{}');".format(id, name.replace(' ', '.'))
         cursor.execute(insert)
         conn.commit()
     except:
@@ -90,6 +91,7 @@ def get_position(id, name):
         return None
 
 def remove(id, name):
+    print("NAME 1: ", name)
     try:
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
@@ -108,6 +110,7 @@ def remove(id, name):
         print("Error: [remove]")
 
 def popped(id, name):
+    print("NAME 2: ", name)
     print('popped')
     try:
         conn = psycopg2.connect(uri)
