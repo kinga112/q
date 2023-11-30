@@ -64,7 +64,7 @@ def get_queue(id):
         cursor.execute(get)
         queue = []
         for row in cursor:
-            queue.append(row[1])
+            queue.append(row[1].replace('.', ' '))
         return queue
     except:
         cursor.execute("ROLLBACK")
