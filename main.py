@@ -11,6 +11,8 @@ cursor = conn.cursor()
 def create_queue(id):
     try:
         create = "CREATE TABLE {} (id serial primary key, name varchar(256));".format(id)
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         cursor.execute(create)
         conn.commit()
     except:
@@ -28,6 +30,8 @@ def create_queue(id):
     
 def get_in_queue(id, name):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         insert = "INSERT into {} (name) values ('{}');".format(id, name)
         cursor.execute(insert)
         conn.commit()
@@ -38,6 +42,8 @@ def get_in_queue(id, name):
 
 def get_queue(id):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         queue = []
@@ -52,6 +58,8 @@ def get_queue(id):
 
 def check_id(id):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         print("GET: {}".format(get))
         cursor.execute(get)
@@ -64,6 +72,8 @@ def check_id(id):
 
 def get_position(id, name):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         count = 0
@@ -79,6 +89,8 @@ def get_position(id, name):
 
 def remove(id, name):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         delete = "DELETE FROM {} Where name = '{}';".format(id, name)
         cursor.execute(delete)
         conn.commit()
@@ -96,6 +108,8 @@ def remove(id, name):
 def popped(id, name):
     print('popped')
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         insert = "INSERT into pop{} (name) values ('{}');".format(id, name)
         cursor.execute(insert)
         conn.commit()
@@ -106,6 +120,8 @@ def popped(id, name):
 
 def get_pop(id):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM pop{}".format(id)
         cursor.execute(get)
         data = ''
