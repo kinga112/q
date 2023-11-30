@@ -40,8 +40,8 @@
     }
 
     function myFunction() {
-      var txt;
       var person = prompt("Please enter your name:", "name");
+      person.replace(' ', '.')
       if (person == null || person == "") {
         myFunction()
       }else{
