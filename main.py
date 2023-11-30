@@ -38,8 +38,8 @@ def get_in_queue(id, name):
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         for row in cursor:
-            print("ROWROWRORW: ", row)
-            if name in row.replace('.', ' '):
+            print("ROWROWRORW: ", type(row))
+            if name in row[1].replace('.', ' '):
                 return
         else:
             print('nah man')
