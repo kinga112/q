@@ -33,6 +33,8 @@ def get_in_queue(id, name):
     if '%' in name:
         return
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         if name.replace(' ', '.') in cursor:
