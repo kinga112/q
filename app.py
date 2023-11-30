@@ -95,7 +95,7 @@ def in_queue_id(id):
             main.get_in_queue(id, name)
             position = main.get_position(id, name)
 
-        return redirect('/in_queue/id/{}/{}'.format(id, name))
+        return redirect('/in_queue/id/{}/{}'.format(id, name.replace(' ', '.')))
 
     if request.method == 'GET':
         name = 'none'
