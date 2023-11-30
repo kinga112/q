@@ -30,9 +30,19 @@ def create_queue(id):
     
 def get_in_queue(id, name):
     print("NAME 0: ", name)
+    if '%' in name:
+        return
     try:
-        if '%' in name:
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        if name.replace(' ', '.') in cursor:
+            print(cursor)
             return
+        else:
+            print('nah man')
+    except:
+        print('Error ')
+    try:
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
         insert = "INSERT into {} (name) values ('{}');".format(id, name.replace(' ', '.'))
