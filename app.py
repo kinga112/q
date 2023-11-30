@@ -48,12 +48,10 @@ def create_queue(id):
     qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
 
     if request.method == 'POST':
-        print("POST")
         main.create_queue(id)
         id = '{}'.format(main.check_id(id))
     
     if request.method == 'GET':
-        print("GET")
         id = main.check_id(id)
         if id is None:
             id = 'QUEUE ID DOESNT EXISTS'
@@ -99,8 +97,6 @@ def in_queue_id(id):
 
     if request.method == 'GET':
         name = 'none'
-
-    print("NAME: {}\n\n".format(name))
 
     main.del_pics()
 

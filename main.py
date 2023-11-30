@@ -29,7 +29,6 @@ def create_queue(id):
         print("Table [pop{}] already created".format(id))
     
 def get_in_queue(id, name):
-    print("NAME 0: ", name)
     if '%' in name:
         return
     try:
@@ -123,8 +122,6 @@ def remove(id, name):
         print("Error: [remove]")
 
 def popped(id, name):
-    print("NAME 2: ", name)
-    print('popped')
     try:
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
