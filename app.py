@@ -3,7 +3,6 @@ import random
 import main
 import pyqrcode
 import string
-import aws
 
 app = Flask(__name__)
 
