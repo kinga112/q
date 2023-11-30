@@ -30,6 +30,8 @@ def create_queue(id):
     
 def get_in_queue(id, name):
     try:
+        if '%' in name:
+            return
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
         insert = "INSERT into {} (name) values ('{}');".format(id, name)
