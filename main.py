@@ -37,9 +37,11 @@ def get_in_queue(id, name):
         cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
-        if name.replace(' ', '.') in cursor:
-            print(cursor)
-            return
+        for row in cursor:
+            print("ROWROWRORW: ", row)
+            if name in row.replace(' ', '.'):
+                print(cursor)
+                return
         else:
             print('nah man')
     except:
