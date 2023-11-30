@@ -39,8 +39,7 @@ def get_in_queue(id, name):
         cursor.execute(get)
         for row in cursor:
             print("ROWROWRORW: ", row)
-            if name in row.replace(' ', '.'):
-                print(cursor)
+            if name in row.replace('.', ' '):
                 return
         else:
             print('nah man')
