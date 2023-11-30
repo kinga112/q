@@ -3,6 +3,7 @@ import random
 import main
 import pyqrcode
 import string
+import aws
 
 app = Flask(__name__)
 
@@ -44,14 +45,18 @@ def admin(id):
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
 
-    qrcode = pyqrcode.create('cyber-sequence.herokuapp.com/in_queue/id/{}'.format(id))
+    qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
     # qrcode.svg('uca-url.svg', scale=8)
     # qrcode.eps('uca-url.eps', scale=2)
-    qrcode.png('static/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
-
-    qr_pic = 'code{}.png'.format(id)
-    print("QR PIC: ", qr_pic)
-    num = id
+    # file = qrcode.png('code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+    # with open('code{}.png'.format(id),"r") as f:
+    #     f.write(f.read())
+    qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+    # aws.upload_file_to_bucket('code{}.png'.format(id))
+    qr_pic = '/tmp/code{}.png'.format(id)
+    # print("QR PIC: ", qr_pic)
+    # print("F: ", file)
+    # num = id
 
     if request.method == 'POST':
         print("POST")
@@ -66,7 +71,7 @@ def create_queue(id):
         else:
             id = '{}'.format(id)
 
-    return render_template('create_queue.html', id=id, num=num, qr_pic=qr_pic)
+    return render_template('create_queue.html', id=id)#,num=num)
 
 @app.route('/get_in_queue')
 def get_in_queue():
