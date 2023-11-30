@@ -108,7 +108,7 @@ def remove(id, name):
     try:
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
-        delete = "DELETE FROM {} Where name = '{}';".format(id, name)
+        delete = "DELETE FROM {} Where name = '{}';".format(id, name.replace(' ', '.'))
         cursor.execute(delete)
         conn.commit()
         get = "SELECT * FROM {}".format(id)
