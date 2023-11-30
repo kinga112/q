@@ -128,7 +128,7 @@ def popped(id, name):
     try:
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
-        insert = "INSERT into pop{} (name) values ('{}');".format(id, name)
+        insert = "INSERT into pop{} (name) values ('{}');".format(id, name.replace(' ', '.'))
         cursor.execute(insert)
         conn.commit()
     except:
