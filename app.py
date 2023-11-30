@@ -31,11 +31,11 @@ def admin(id):
         if queue[0] == '':
             now_serving = 'No Customers In Line'
         else:
-            now_serving = 'Now Serving: {}'. format(queue[0])
+            now_serving = 'Now Serving: {}'. format(queue[0].replace('.', ' '))
     except:
         now_serving = 'No Customers in line'
     try:
-        next_cust = 'Next Customer: {}'.format(queue[1])
+        next_cust = 'Next Customer: {}'.format(queue[1].replace('.', ' '))
     except:
         next_cust = ''
 
@@ -45,32 +45,20 @@ def admin(id):
 def create_queue(id):
 
     qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    # qrcode.svg('uca-url.svg', scale=8)
-    # qrcode.eps('uca-url.eps', scale=2)
-    # file = qrcode.png('code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
-    # with open('code{}.png'.format(id),"r") as f:
-    #     f.write(f.read())
     qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
-    # aws.upload_file_to_bucket('code{}.png'.format(id))
-    qr_pic = '/tmp/code{}.png'.format(id)
-    # print("QR PIC: ", qr_pic)
-    # print("F: ", file)
-    # num = id
 
     if request.method == 'POST':
-        print("POST")
         main.create_queue(id)
         id = '{}'.format(main.check_id(id))
     
     if request.method == 'GET':
-        print("GET")
         id = main.check_id(id)
         if id is None:
             id = 'QUEUE ID DOESNT EXISTS'
         else:
             id = '{}'.format(id)
 
-    return render_template('create_queue.html', id=id)#,num=num)
+    return render_template('create_queue.html', id=id)
 
 @app.route('/get_in_queue')
 def get_in_queue():
@@ -105,12 +93,10 @@ def in_queue_id(id):
             main.get_in_queue(id, name)
             position = main.get_position(id, name)
 
-        return redirect('/in_queue/id/{}/{}'.format(id, name))
+        return redirect('/in_queue/id/{}/{}'.format(id, name.replace(' ', '.')))
 
     if request.method == 'GET':
         name = 'none'
-
-    print("NAME: {}\n\n".format(name))
 
     main.del_pics()
 

@@ -11,6 +11,8 @@ cursor = conn.cursor()
 def create_queue(id):
     try:
         create = "CREATE TABLE {} (id serial primary key, name varchar(256));".format(id)
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         cursor.execute(create)
         conn.commit()
     except:
@@ -27,8 +29,25 @@ def create_queue(id):
         print("Table [pop{}] already created".format(id))
     
 def get_in_queue(id, name):
+    if '%' in name:
+        return
     try:
-        insert = "INSERT into {} (name) values ('{}');".format(id, name)
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
+        get = "SELECT * FROM {}".format(id)
+        cursor.execute(get)
+        for row in cursor:
+            print("ROWROWRORW: ", type(row))
+            if name in row[1].replace('.', ' '):
+                return
+        else:
+            print('nah man')
+    except:
+        print('Error ')
+    try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
+        insert = "INSERT into {} (name) values ('{}');".format(id, name.replace(' ', '.'))
         cursor.execute(insert)
         conn.commit()
     except:
@@ -38,11 +57,13 @@ def get_in_queue(id, name):
 
 def get_queue(id):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         queue = []
         for row in cursor:
-            queue.append(row[1])
+            queue.append(row[1].replace('.', ' '))
         return queue
     except:
         cursor.execute("ROLLBACK")
@@ -52,6 +73,8 @@ def get_queue(id):
 
 def check_id(id):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         print("GET: {}".format(get))
         cursor.execute(get)
@@ -64,6 +87,8 @@ def check_id(id):
 
 def get_position(id, name):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         count = 0
@@ -78,8 +103,11 @@ def get_position(id, name):
         return None
 
 def remove(id, name):
+    print("NAME 1: ", name)
     try:
-        delete = "DELETE FROM {} Where name = '{}';".format(id, name)
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
+        delete = "DELETE FROM {} Where name = '{}';".format(id, name.replace(' ', '.'))
         cursor.execute(delete)
         conn.commit()
         get = "SELECT * FROM {}".format(id)
@@ -94,9 +122,10 @@ def remove(id, name):
         print("Error: [remove]")
 
 def popped(id, name):
-    print('popped')
     try:
-        insert = "INSERT into pop{} (name) values ('{}');".format(id, name)
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
+        insert = "INSERT into pop{} (name) values ('{}');".format(id, name.replace(' ', '.'))
         cursor.execute(insert)
         conn.commit()
     except:
@@ -106,6 +135,8 @@ def popped(id, name):
 
 def get_pop(id):
     try:
+        conn = psycopg2.connect(uri)
+        cursor = conn.cursor()
         get = "SELECT * FROM pop{}".format(id)
         cursor.execute(get)
         data = ''
