@@ -41,7 +41,9 @@
 
     function myFunction() {
       var person = prompt("Please enter your name:", "name");
-      person.replace(' ', '.')
+      var person = person.replace(' ', '.')
+      console.log("PERSON")
+      console.log(person)
       if (person == null || person == "") {
         myFunction()
       }else{
