@@ -2,9 +2,9 @@ import os
 from flask import Flask, render_template, request, redirect
 import random
 import main
-# import pyqrcode
+import pyqrcode
 import string
-import segno
+# import segno
 import boto3
 
 app = Flask(__name__)
@@ -47,13 +47,13 @@ def admin(id):
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
 
-    # qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    # qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+    qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
+    qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
     # qr_pic = '/tmp/code{}.png'.format(id)
     # qr_pic.save('/tmp/code{}.png'.format(id))
 
-    qrcode = segno.make_qr('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    qrcode.save('/tmp/code{}.png'.format(id))
+    # qrcode = segno.make_qr('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
+    # qrcode.save('/tmp/code{}.png'.format(id))
     qr_pic = 'code{}.png'.format(id)
     client = boto3.client('s3')
     client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
