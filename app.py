@@ -5,7 +5,6 @@ import pyqrcode
 import string
 
 app = Flask(__name__, static_url_path="/tmp", static_folder='tmp')
-app.config['/tmp']
 
 @app.route('/')
 def home():
