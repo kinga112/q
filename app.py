@@ -46,7 +46,7 @@ def admin(id):
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
     qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    qrcode.png('/tmp/code{}.png'.format(id), scale=7, module_color=[0, 0, 0, 128])#, background=[0xFF,0xFF,0xFF])
+    qrcode.png('/tmp/code{}.png'.format(id), scale=7, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF, 0x94])
     client = boto3.client('s3')
     client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
     image_src = 'https://{}.s3.amazonaws.com/{}'.format('queue-project', 'code{}.png'.format(id))
