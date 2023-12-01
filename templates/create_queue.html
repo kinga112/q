@@ -2,44 +2,73 @@
 <head>
 <style>
   
-  .container { 
-    height: 700px;
-    position: relative;
-    border: 3px solid #950740;
+  @import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Roboto:ital@1&display=swap');
+  .container {
+    /* position: relative; */
+    display: flex;
+    /* top: 40%; */
+    /* left: 50%; */
+    /* -ms-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 75%;
+    width: 35%;
+    background-color: #ffffff94;
+    border-radius: 15px;
+    box-shadow: 0px 0px 75px #31415983;
   }
 
   .center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    color: #eeeeee;
-    font-size: 13px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    /* position: absolute; */
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* -ms-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
   }
 
-  #bottom {
-    position:absolute;
-    bottom:0;
-    right:0;
+  #top{
+    text-align: center;
+    padding: 5px;
+    font-size: 1.25vw;
+    font-family: Roboto;
+    font-weight: 600;
+  }
+  #bottom{
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1vw;
+  }
+  #image-container{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50%;
+    width: 50%;
+  }
+  img{
+    object-fit: contain;
   }
 
 </style>
 
 <body>
-  <div id='bottom'>
-    <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
-  </div>
-
-  <body style="background-color: #1a1a1d;"></body>
+  <body style="background-color: #FAF9F6;"></body>
   <div class="container">
     <div class="center">
-      <img src="/tmp/code{{ id }}.png" width="400" height="400">
-      <h1>Scan QR Code to get in line</h1>
-      <h2>Or Use Code: {{ id }}</h2>
+      <div id="image-container">
+        <img src="{{ image_src }}">
+      </div>
+      <div id="top">
+        <h1>Scan QR Code to get in line</h1>
+      </div>
+      <div id="bottom">
+        <h2>Or Use Code: {{ id }}</h2>
+      </div>
     </div>
   </div>
 

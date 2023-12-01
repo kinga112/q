@@ -1,8 +1,10 @@
+import os
 from flask import Flask, render_template, request, redirect
 import random
 import main
 import pyqrcode
 import string
+import boto3
 
 app = Flask(__name__)
 
@@ -43,9 +45,11 @@ def admin(id):
 
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
-
     qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+    qrcode.png('/tmp/code{}.png'.format(id), scale=7, module_color=[0x00, 0x00, 0x00], background=[0xFF,0xFF,0xFF, 0x94])
+    client = boto3.client('s3')
+    client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
+    image_src = 'https://{}.s3.amazonaws.com/{}'.format('queue-project', 'code{}.png'.format(id))
 
     if request.method == 'POST':
         main.create_queue(id)
@@ -58,7 +62,7 @@ def create_queue(id):
         else:
             id = '{}'.format(id)
 
-    return render_template('create_queue.html', id=id)
+    return render_template('create_queue.html', id=id, image_src=image_src)
 
 @app.route('/get_in_queue')
 def get_in_queue():

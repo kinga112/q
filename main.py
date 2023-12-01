@@ -37,11 +37,8 @@ def get_in_queue(id, name):
         get = "SELECT * FROM {}".format(id)
         cursor.execute(get)
         for row in cursor:
-            print("ROWROWRORW: ", type(row))
             if name in row[1].replace('.', ' '):
                 return
-        else:
-            print('nah man')
     except:
         print('Error ')
     try:
@@ -76,7 +73,6 @@ def check_id(id):
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()
         get = "SELECT * FROM {}".format(id)
-        print("GET: {}".format(get))
         cursor.execute(get)
         return id
     except:
@@ -103,7 +99,6 @@ def get_position(id, name):
         return None
 
 def remove(id, name):
-    print("NAME 1: ", name)
     try:
         conn = psycopg2.connect(uri)
         cursor = conn.cursor()

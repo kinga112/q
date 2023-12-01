@@ -2,29 +2,50 @@
 <head>
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Roboto:ital@1&display=swap');
   .container {
-    height: 200px;
     position: relative;
-    border: 3px solid #950740;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 35%;
+    background-color: #ffffff94;
+    border-radius: 15px;
+    box-shadow: 0px 0px 75px #31415983;
   }
 
   .center {
-    margin: 0;
     position: absolute;
-    color: #eeeeee;
+    color: black;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    /* background-color: red; */
+  }
+
+  #top{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    font-size: 26pt;
+    font-family: Roboto;
+    font-weight: 700;
+    /* background-color: blue; */
   }
 
 </style>
 
-<body style="background-color: #1a1a1d;">
+<body style="background-color: #FAF9F6;">
 
   <div class="container">
     <div class="center">
-      <h1>Your spot in line: {{ position }}</h1>
+      <div id="top">
+        Your spot in line: {{ position }}
+      </div>
     </div>
   </div>
 
