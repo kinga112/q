@@ -5,6 +5,7 @@ import pyqrcode
 import string
 
 app = Flask(__name__, static_url_path="/tmp", static_folder='tmp')
+app.config['/tmp']
 
 @app.route('/')
 def home():
@@ -46,6 +47,7 @@ def create_queue(id):
 
     qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
     qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
+    qr_pic = '/tmp/code{}.png'.format(id)
 
     if request.method == 'POST':
         main.create_queue(id)
@@ -58,7 +60,7 @@ def create_queue(id):
         else:
             id = '{}'.format(id)
 
-    return render_template('create_queue.html', id=id)
+    return render_template('create_queue.html', id=id, qr_pic=qr_pic)
 
 @app.route('/get_in_queue')
 def get_in_queue():
