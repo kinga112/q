@@ -23,28 +23,24 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    /* background-color: red; */
   }
 
   #top{
     text-align: center;
-    padding: 50px;
-    font-size: 25pt;
+    padding: 15px;
+    font-size: 18pt;
     font-family: Roboto;
     font-weight: 600;
-    /* background-color: blue; */
   }
   #bottom{
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 50px;
-    font-size: 18pt;
+    font-family: Roboto;
+    padding: 15px;
+    font-size: 14pt;
   }
   img{
     height: 50%;
+    width: auto;
   }
 
 </style>
@@ -53,11 +49,11 @@
   <body style="background-color: #FAF9F6;"></body>
   <div class="container">
     <div class="center">
+      <img src="/tmp/code{{ id }}.png">
       <div id="top">
-        <img src="/tmp/code{{ id }}.png">
+        <h1>Scan QR Code to get in line</h1>
       </div>
       <div id="bottom">
-        <h1>Scan QR Code to get in line</h1>
         <h2>Or Use Code: {{ id }}</h2>
       </div>
     </div>
