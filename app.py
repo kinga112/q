@@ -55,11 +55,12 @@ def create_queue(id):
     qrcode = segno.make_qr('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
     print("QRCODE: ", qrcode)
     qrcode.save('/tmp/code{}.png'.format(id))
+    qr_pic = 'code{}.png'.format(id)
 
     client = boto3.client('s3')
     client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
     print("OKAY OKAY1")
-    client.download_file('queue-project', 'code{}.png'.format(id), '/tmp/code{}.png'.format(id))
+    client.download_file('queue-project', 'code{}.png'.format(id), '/static/code{}.png'.format(id))
     print("OKAY OKAY2")
     # print(open('/tmp/code{}.png'.format(id)).read(), encoding="utf8")
 
@@ -75,7 +76,7 @@ def create_queue(id):
         else:
             id = '{}'.format(id)
 
-    return render_template('create_queue.html', id=id)
+    return render_template('create_queue.html', id=id, qr_pic=qr_pic)
 
 @app.route('/get_in_queue')
 def get_in_queue():
