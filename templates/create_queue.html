@@ -4,12 +4,16 @@
   
   @import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Roboto:ital@1&display=swap');
   .container {
-    position: relative;
-    top: 40%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    height: 50%;
+    /* position: relative; */
+    display: flex;
+    /* top: 40%; */
+    /* left: 50%; */
+    /* -ms-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 75%;
     width: 35%;
     background-color: #ffffff94;
     border-radius: 15px;
@@ -17,29 +21,37 @@
   }
 
   .center {
-    position: absolute;
+    /* position: absolute; */
     color: black;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: auto;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* -ms-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
   }
 
   #top{
     text-align: center;
-    padding: 15px;
-    font-size: 18pt;
+    padding: 5px;
+    font-size: 1.25vw;
     font-family: Roboto;
     font-weight: 600;
   }
   #bottom{
     text-align: center;
     font-family: Roboto;
-    font-size: 14pt;
+    font-size: 1vw;
+  }
+  #image-container{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50%;
+    width: 50%;
   }
   img{
-    height: 300px;
-    width: 300px;
+    object-fit: contain;
   }
 
 </style>
@@ -48,8 +60,9 @@
   <body style="background-color: #FAF9F6;"></body>
   <div class="container">
     <div class="center">
-      <img src="{{ image_src }}">
-      <!-- <img src="{{ url_for('static', filename=qr_pic) }}"> -->
+      <div id="image-container">
+        <img src="{{ image_src }}">
+      </div>
       <div id="top">
         <h1>Scan QR Code to get in line</h1>
       </div>

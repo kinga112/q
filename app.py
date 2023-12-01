@@ -46,29 +46,11 @@ def admin(id):
 
 @app.route('/create_queue/<id>', methods=['POST', 'GET'])
 def create_queue(id):
-
     qrcode = pyqrcode.create('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    qrcode.png('/tmp/code{}.png'.format(id), scale=6, module_color=[0, 0, 0, 128], background=[0xFF,0xFF,0xFF])
-    # qr_pic = '/tmp/code{}.png'.format(id)
-    # qr_pic.save('/tmp/code{}.png'.format(id))
-
-    # qrcode = segno.make_qr('cyber-sequence.vercel.app/in_queue/id/{}'.format(id))
-    # qrcode.save('/tmp/code{}.png'.format(id))
-    qr_pic = 'code{}.png'.format(id)
+    qrcode.png('code{}.png'.format(id), scale=7, module_color=[0, 0, 0, 128])#, background=[0xFF,0xFF,0xFF])
     client = boto3.client('s3')
-    client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
-    # print("OKAY OKAY 1")
-    # client.download_file('queue-project', 'code{}.png'.format(id), '/tmp/c2o3de{}.png'.format(id))
-    # s3 = boto3.resource('s3', region_name='us-east-2')
-    # print("OKAY OKAY2")
-    # bucket = s3.Bucket('queue-project')
-    # print("OKAY OKAY3")
-    # object = bucket.Object('code{}.png'.format(id))
-    # print("OBJECT KEY:", object.key)
-    image_src = 'https://{}.s3.amazonaws.com/{}'.format('queue-project', qr_pic)
-    # os.listdir('/tmp')
-    # print(open('/tmp/code{}.png'.format(id)).read(), encoding="utf8")
-
+    client.upload_file('code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
+    image_src = 'https://{}.s3.amazonaws.com/{}'.format('queue-project', 'code{}.png'.format(id))
 
     if request.method == 'POST':
         main.create_queue(id)
