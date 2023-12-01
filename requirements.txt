@@ -4,5 +4,4 @@ pypng
 pyqrcode
 psycopg2-binary
 python-dotenv
-segno
 boto3
