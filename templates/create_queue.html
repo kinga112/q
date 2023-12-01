@@ -2,44 +2,52 @@
 <head>
 <style>
   
-  .container { 
-    height: 700px;
+  @import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Roboto:ital@1&display=swap');
+  .container {
     position: relative;
-    border: 3px solid #950740;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 35%;
+    background-color: #ffffff94;
+    border-radius: 15px;
+    box-shadow: 0px 0px 75px #31415983;
   }
 
   .center {
-    margin: 0;
     position: absolute;
+    color: black;
     top: 50%;
     left: 50%;
-    text-align: center;
-    color: #01060c;
-    font-size: 13px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    /* background-color: red; */
   }
 
-  #bottom {
-    position:absolute;
-    bottom:0;
-    right:0;
+  #top{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    font-size: 26pt;
+    font-family: Roboto;
+    font-weight: 700;
+    /* background-color: blue; */
   }
 
 </style>
 
 <body>
-  <!-- <div id='bottom'>
-    <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
-  </div> -->
-
   <body style="background-color: #FAF9F6;"></body>
   <div class="container">
     <div class="center">
-      <img src="/tmp/code{{ id }}.png" width="400" height="400">
-      <h1>Scan QR Code to get in line</h1>
-      <h2>Or Use Code: {{ id }}</h2>
+      <top>
+        <img src="/tmp/code{{ id }}.png" width="400" height="400">
+        <h1>Scan QR Code to get in line</h1>
+        <h2>Or Use Code: {{ id }}</h2>
+      </top>
     </div>
   </div>
 
