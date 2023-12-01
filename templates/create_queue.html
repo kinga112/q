@@ -28,15 +28,21 @@
 
   #top{
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    font-size: 26pt;
+    padding: 50px;
+    font-size: 25pt;
     font-family: Roboto;
-    font-weight: 700;
+    font-weight: 600;
     /* background-color: blue; */
   }
-
+  #bottom{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    font-size: 18pt;
+  }
   img{
     height: 50%;
   }
@@ -47,11 +53,13 @@
   <body style="background-color: #FAF9F6;"></body>
   <div class="container">
     <div class="center">
-      <img src="/tmp/code{{ id }}.png">
-      <top>
+      <div id="top">
+        <img src="/tmp/code{{ id }}.png">
+      </div>
+      <div id="bottom">
         <h1>Scan QR Code to get in line</h1>
         <h2>Or Use Code: {{ id }}</h2>
-      </top>
+      </div>
     </div>
   </div>
 
