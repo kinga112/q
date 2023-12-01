@@ -90,13 +90,13 @@
 
   .left {
     left: 0;
-    background-color: #1a1a1d;
+    background-color: #FAF9F6;
   }
 
   .right {
     top: 10vw;
     right: 10vw;
-    background-color: #1a1a1d;
+    background-color: #FAF9F6;
     height: 30vw
   }
 
@@ -106,7 +106,7 @@
     top: 50%;
     left: 50%;
     text-align: center;
-    color: #eeeeee;
+    /* color: #eeeeee; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.7vw;
     -ms-transform: translate(-50%, -50%);
@@ -149,7 +149,7 @@
 </style>
 </head>
 
-<body style="background-color: #1a1a1d;">
+<body style="background-color: #FAF9F6;">
 
 <div id='bottom'>
   <img src="{{url_for('static', filename='new_logo.png')}}" width="10.41666vw" height="5.20833vw" style="float:right">
@@ -157,7 +157,7 @@
 
 <div class="split left">
   <div class="centered">
-    <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee; position: absolute; top: -13vw; left: -13vw; width: 26vw;">
+    <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; position: absolute; top: -13vw; left: -13vw; width: 26vw;">
       <br>{{ now_serving }}</br>
       <br>{{ next_cust }}</br>
     </p>
@@ -179,9 +179,9 @@
 
 <div class="split right">
   <div class="centeredright">
-    <div style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #eeeeee; text-align: center;">
+    <div style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #01060c; text-align: center;">
       {% if queue %}
-      <table style="width: 26vw; color: #eeeeee;">
+      <table style="width: 26vw; color: #01060c;">
           <tr>
             <th>
               Queue

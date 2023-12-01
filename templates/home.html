@@ -2,19 +2,21 @@
 <head>
 
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Roboto:ital@1&display=swap');
 /* NAVBAR */
 ul {
   list-style-type: none;
-  margin: 0;
+  margin: 25 50;
   padding: 0;
   overflow: hidden;
-  background-color: #56081e;
+  background-color: rgba(100, 148, 237, 0.877);
+  border-radius: 7px;
+  box-shadow: 2px 3px 15px #314159;
 }
 
 li {
   float: left;
-  border-right:1px solid #1a1a1d;
+  border-right:2px solid #faf9f685;
 }
 
 li:last-child {
@@ -24,239 +26,21 @@ li:last-child {
 li a {
   display: block;
   color: white;
+  font-size: 13pt;
+  font-weight: 600;
   text-align: center;
-  font-size: 13;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Roboto;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 li a:hover:not(.active) {
-  background-color: #c3073f;
+  background-color: rgba(41, 95, 196, 0.274);
 }
 
 .active {
-  background-color: #c3073f;
+  background-color: #2b4fb4;
 }  
-
-
-/* CREATE BUTTON */
-.create_button
-{
-    position: absolute;
-    top: 50%;
-    right: 550;
-    left: 0;
-    display: block;
-    width: 7.8125vw;
-    height: 7.8125vw;
-    padding: 13vw;
-    margin: 0 auto;
-    border: 0;
-    cursor: pointer;
-    border-radius: 2px;
-    transform: translateY(-50%);
-    box-shadow: 0 10px 20px -5px #950740;
-    overflow: hidden;
-}
-
-.create_button:before, create_button:after
-{
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-
-.create_button:before
-{
-    background-color: #c3073f;
-    transform: scale(1);
-    background-image: url("{{url_for('static', filename='create_queue_img.png')}}");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 26.0416vw, 26.0416vw;
-    transition: 0.3s ease transform;
-    z-index: 1;
-}
-
-.create_button:after
-{
-    opacity: 0.50;
-    z-index: 2;
-}
-
-.create_button div
-{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
-}
-
-.create_button div:before, .create_button div:after
-{
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    color: #eeeeee;
-    font-size: 2.083vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 1;
-    text-align: center;
-    padding: 25px 0;
-    transition: 0.3s ease all;
-}
-
-.create_button div:before
-{
-    content: "Create Queue";
-    padding-top: 5.20833vw;
-    letter-spacing: 0;
-    opacity: 1;
-    transform: scale(1);
-}
-
-.create_button div:after
-{
-    content: "";
-    padding-top: 6.77083vw;
-    letter-spacing: -10px;
-    transform: scale(0);
-    opacity: 0;
-}
-
-.create_button:hover:before
-{
-    transform: scale(1.3);
-}
-
-.create_button:hover div:before
-{
-    letter-spacing: 3px;
-    opacity: 0;
-    transform: scale(4);
-}
-
-.create_button:hover div:after
-{
-    letter-spacing: 0;
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* GET BUTTON */
-.get_button
-{
-    position: absolute;
-    top: 50%;
-    right: 0;
-    left: 550;
-    display: block;
-    width: 7.8125vw;
-    height: 7.8125vw;
-    padding: 13.0208vw;
-    margin: 0 auto;
-    border: 0;
-    cursor: pointer;
-    border-radius: 2px;
-    transform: translateY(-50%);
-    box-shadow: 0 10px 20px -5px #950740;
-    overflow: hidden;
-}
-
-.get_button:before, .get_button:after
-{
-    background-color: #c3073f;
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-
-.get_button:before
-{
-    transform: scale(1);
-    background-image: url("{{url_for('static', filename='get_in_queue.png')}}");
-    background-size: cover;
-    transition: 0.3s ease transform;
-    z-index: 1;
-}
-
-.get_button:after
-{
-    opacity: 0.50;
-    z-index: 2;
-}
-
-.get_button div
-{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
-}
-
-.get_button div:before, .get_button div:after
-{
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    color: #eeeeee;
-    font-size: 2.08333vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 1;
-    text-align: center;
-    padding: 25px 0;
-    transition: 0.3s ease all;
-}
-
-.get_button div:before
-{
-    content: "Get In Queue";
-    padding-top: 5.2083vw;
-    letter-spacing: 0;
-    opacity: 1;
-    transform: scale(1);
-}
-
-.get_button div:after
-{
-    content: "";
-    padding-top: 5.2083vw;
-    letter-spacing: -10px;
-    transform: scale(0);
-    opacity: 0;
-}
-
-.get_button:hover:before
-{
-    transform: scale(1.3);
-}
-
-.get_button:hover div:before
-{
-    letter-spacing: 3px;
-    opacity: 0;
-    transform: scale(4);
-}
-
-.get_button:hover div:after
-{
-    letter-spacing: 0;
-    opacity: 1;
-    transform: scale(1);
-}
 
 #bottom {
     position:absolute;
@@ -264,28 +48,114 @@ li a:hover:not(.active) {
     right:0;
 }
 
+#main-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#left{
+    grid-row: 1;
+    grid-column: 1;
+    color:#01060c;
+    font-size: 50;
+    font-weight: 700;
+    justify-content: center;
+    padding: 100px 50px 100px 200px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+#right{
+    grid-row: 1;
+    grid-column: 2;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+/* CSS */
+.button-6 {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 30px;
+  font-weight: 300;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 15px;
+  min-height: 3rem;
+  padding: 50px 75px;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
 </style>
 </head>
 
-<body style="background-color: #1a1a1d;">
-
-    <ul>
+<body style="background-color: #FAF9F6; font-family: Roboto">
+    <!-- <ul>
         <li><a class="active" href="/">Home</a></li>
         <li><a href="/news">News</a></li>
         <li><a href="/about">About</a></li>
         <li style="float:right"><a href="/contact">Contact</a></li>
-    </ul>
+    </ul> -->
 
-    <div id='bottom'>
+    <!-- <div id='bottom'>
         <img src="{{url_for('static', filename='new_logo.png')}}" width="200" height="100" style="float:right">
-    </div>
+    </div> -->
 
-    <form action="/create_queue/{{ id }}" method="POST" action="">
-        <button class="create_button" href="/create_queue/{{ id }}" onclick="window.open('/admin/{{ id }}','Admin','width=1000,height=1000')"><div></div></button>
-    </form>
-    <form action="/get_in_queue">
-        <button class="get_button"><div></div></button>
-    </form>
+    <div id="main-grid">
+        <div id="left">
+            Welcome to Q
+            <br/>
+            <br/>
+            Shop Smarter, Wait Less! Join the virtual Q and make the most of your time.
+        </div>
+        <div id="right">
+            <form action="/create_queue/{{ id }}" method="POST" action="">
+                <button class="button-6" href="/create_queue/{{ id }}" onclick="window.open('/admin/{{ id }}','Admin','width=1000,height=700')">Create Q</button>
+            </form>
+            <form action="/get_in_queue">
+                <button class="button-6">&nbsp;&nbsp;Join Q&nbsp;&nbsp;</button>
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>

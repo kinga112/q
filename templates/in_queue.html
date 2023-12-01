@@ -2,32 +2,61 @@
 <head>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Roboto:ital@1&display=swap');
   .container {
-    height: 200px;
     position: relative;
-    border: 3px solid #950740;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 35%;
+    background-color: #ffffff94;
+    border-radius: 15px;
+    box-shadow: 0px 0px 75px #31415983;
   }
 
   .center {
-    margin: 0;
     position: absolute;
-    color: #eeeeee;
+    color: black;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    /* background-color: red; */
   }
 
+  #top{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    font-size: 18pt;
+    font-family: Roboto;
+    font-weight: 600;
+    /* background-color: blue; */
+  }
+  #bottom{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    font-size: 18pt;
+  }
 </style>
 
-<body style="background-color: #1a1a1d;">
+<body style="background-color: #FAF9F6;">
 
   <div class="container">
     <div class="center">
       <form action="/in_queue/id/{{ id }}" method="POST" action="">
-        <label for="name">First and Last Name</label><br>
-        <input type="text" id="name" name="name"><br><br>
-        <input type="submit" value="Submit">
+        <label id="top" for="name">First and Last Name</label><br>
+        <div id="bottom">
+          <input type="text" id="name" name="name"><br><br>
+          <input type="submit" value="Submit">
+        </div>
       </form>
     </div>
   </div>
