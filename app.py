@@ -57,11 +57,11 @@ def create_queue(id):
     qrcode.save('/tmp/code{}.png'.format(id))
     qr_pic = 'code{}.png'.format(id)
 
-    client = boto3.client('s3')
-    client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
-    print("OKAY OKAY1")
-    client.download_file('queue-project', 'code{}.png'.format(id), '/tmp/c2o3de{}.png'.format(id))
-    print("OKAY OKAY2")
+    # client = boto3.client('s3')
+    # client.upload_file('/tmp/code{}.png'.format(id), 'queue-project', 'code{}.png'.format(id))
+    # print("OKAY OKAY1")
+    # client.download_file('queue-project', 'code{}.png'.format(id), '/tmp/c2o3de{}.png'.format(id))
+    # print("OKAY OKAY2")
     os.listdir('/tmp')
     # print(open('/tmp/code{}.png'.format(id)).read(), encoding="utf8")
 
